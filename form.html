@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up / Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #ffffff;
+            color: #333;
+        }
+        header {
+            background-color: #e6e6fa;
+            color: #333;
+            padding: 1rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #f8f8ff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #4b0082;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #4b0082;
+        }
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        input:focus {
+            outline: none;
+            border-color: #e6e6fa;
+            box-shadow: 0 0 5px rgba(230, 230, 250, 0.5);
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(90deg, #ff3333, #ff6666);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #e60000, #ff3333);
+            transform: scale(1.02);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .form-toggle {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-toggle button {
+            width: auto;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            font-size: 1rem;
+            background: linear-gradient(90deg, #4b0082, #6a0dad);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+        .form-toggle button:hover {
+            background: linear-gradient(90deg, #3a0066, #5a0099);
+            transform: scale(1.02);
+        }
+        .form-toggle button.active {
+            background: linear-gradient(90deg, #6a0dad, #8a2be2);
+        }
+        #signup-form, #signin-form {
+            display: none;
+        }
+        #signup-form.active, #signin-form.active {
+            display: block;
+        }
+        footer {
+            background-color: #e6e6fa;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #4b0082;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>User Authentication</h1>
+    </header>
+    <div class="container">
+        <h2 id="form-title">Sign Up</h2>
+        <form id="signup-form" class="active" action="form.php" method="POST">
+            <input type="hidden" name="action" value="signup">
+            <div class="form-group">
+                <label for="signup-name">Name</label>
+                <input type="text" id="signup-name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-lastname">Last Name</label>
+                <input type="text" id="signup-lastname" name="lastname" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-phone">Phone</label>
+                <input type="tel" id="signup-phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-toggle">
+                <button type="button" id="signup-btn" class="active" onclick="toggleForm('signup')">Sign Up</button>
+                <button type="button" id="signin-btn" onclick="toggleForm('signin')">Sign In</button>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <form id="signin-form" action="form.php" method="POST">
+            <input type="hidden" name="action" value="signin">
+            <div class="form-group">
+                <label for="signin-email">Email</label>
+                <input type="email" id="signin-email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-toggle">
+                <button type="button" id="signup-btn" onclick="toggleForm('signup')">Sign Up</button>
+                <button type="button" id="signin-btn" class="active" onclick="toggleForm('signin')">Sign In</button>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+    <footer>
+        <p>© Panagiotidis Panagiotis Chrysovalantis 2025 | <a href="index.html">Homepage</a>
+
+    </footer>
+
+    <script>
+        function toggleForm(type) {
+            const signupForm = document.getElementById('signup-form');
+            const signinForm = document.getElementById('signin-form');
+            const formTitle = document.getElementById('form-title');
+            const signupBtn = signupForm.querySelector('#signup-btn');
+            const signinBtn = signupForm.querySelector('#signin-btn');
+            const signupBtnSignin = signinForm.querySelector('#signup-btn');
+            const signinBtnSignin = signinForm.querySelector('#signin-btn');
+
+            if (type === 'signup') {
+                signupForm.classList.add('active');
+                signinForm.classList.remove('active');
+                formTitle.textContent = 'Sign Up';
+                signupBtn.classList.add('active');
+                signinBtn.classList.remove('active');
+                signupBtnSignin.classList.add('active');
+                signinBtnSignin.classList.remove('active');
+            } else {
+                signinForm.classList.add('active');
+                signupForm.classList.remove('active');
+                formTitle.textContent = 'Sign In';
+                signupBtn.classList.remove('active');
+                signinBtn.classList.add('active');
+                signupBtnSignin.classList.remove('active');
+                signinBtnSignin.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

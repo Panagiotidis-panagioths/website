@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Info</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f4ef;
+      animation: fadeInBody 1s ease-in-out;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fefcf9;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid #d7ccc8;
+      animation: fadeInUp 1s ease-in-out;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    a {
+      color: #6d4c41;
+      text-decoration: none;
+      font-size: 2em;
+    }
+    h2 {
+      color: #6d4c41;
+      margin-bottom: 30px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .info-item {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #6d4c41;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.6s;
+      transition: transform 0.3s ease;
+    }
+
+    .info-item:hover {
+      transform: scale(1.02);
+    }
+
+    .info-item i,
+    .info-item strong,
+    .info-item a {
+      font-size: 18px;
+      color: #6d4c41;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #8d6e63;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #6d4c41;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .degree {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .degree img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+    nav {
+      background-color: #f7f4ef;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      animation: fadeInBody 3s ease-in-out;
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+    }
+
+    nav ul li {
+      margin: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #6d4c41;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      display: block;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+      color: #6d4c41;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h2>Contact Information</h2>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="ptyxeia.html">Degrees</a></li>
+      <li><a href="experience.html">Experience</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="info-item">
+      <i class="fas fa-user"></i> <strong>Name:</strong> Panagiotidis Panagiotis Chrysovalantis
+    </div>
+
+    <div class="info-item">
+      <i class="fas fa-envelope"></i> <strong>Email:</strong> panagiotidispanagiotis44@gmail.com
+    </div>
+
+    <div class="info-item">
+      <i class="fab fa-github"></i> <strong>GitHub:</strong>
+      <a href="https://github.com/Panagiotidis-panagioths" target="_blank" style="all: unset; cursor: pointer;text-decoration: underline;">
+        Panagiotidis-panagiotis
+      </a>
+    </div>
+<div class="info-item">
+      <i class="fab fa-linkedin"></i> <strong>LinkedIn:</strong>
+      <a href="https://www.linkedin.com/in/panagiotis-panagiotidis-8747a331a/" target="_blank" style="all: unset; cursor: pointer;text-decoration: underline;">
+        panagiotis panagiotidis
+      </a>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-comment"></i> <strong>Message:</strong> Feel free to contact me for any inquiries or help needs.
+    </div>
+
+    <div class="degree">
+
+     <a href="img/me.jpg">
+  <img src="img/me.jpg" width="250" height="100" alt="Image description">
+</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Panagiotidis Panagiotis Chrysovalantis</p> <a href="Resume.pdf" target="_blank">My full resume in PDF</a>
+    </footer>
+  </div>
+</body>
+</html>

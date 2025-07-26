@@ -1,0 +1,26 @@
+[25-Jul-2025 23:14:11 Europe/Berlin] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'your_username'@'localhost' (using password: YES) in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:14:11 Europe/Berlin] Connection failed: Access denied for user 'your_username'@'localhost' (using password: YES)
+[25-Jul-2025 23:14:13 Europe/Berlin] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'your_username'@'localhost' (using password: YES) in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:14:13 Europe/Berlin] Connection failed: Access denied for user 'your_username'@'localhost' (using password: YES)
+[25-Jul-2025 23:15:54 Europe/Berlin] PHP Warning:  Undefined variable $servername in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:54 Europe/Berlin] PHP Warning:  Undefined variable $username in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:54 Europe/Berlin] PHP Warning:  Undefined variable $password in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:54 Europe/Berlin] PHP Warning:  Undefined variable $dbname in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:54 Europe/Berlin] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user ''@'localhost' (using password: NO) in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:54 Europe/Berlin] Connection failed: Access denied for user ''@'localhost' (using password: NO)
+[25-Jul-2025 23:15:55 Europe/Berlin] PHP Warning:  Undefined variable $servername in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:55 Europe/Berlin] PHP Warning:  Undefined variable $username in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:55 Europe/Berlin] PHP Warning:  Undefined variable $password in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:55 Europe/Berlin] PHP Warning:  Undefined variable $dbname in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:55 Europe/Berlin] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user ''@'localhost' (using password: NO) in C:\xampp\htdocs\portofolio1\cookie_handler.php on line 18
+[25-Jul-2025 23:15:55 Europe/Berlin] Connection failed: Access denied for user ''@'localhost' (using password: NO)
+[25-Jul-2025 23:19:38 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:19:43 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:20:03 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:21:19 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:21:40 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:21:42 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:22:42 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:22:49 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:23:33 Europe/Berlin] Geolocation API failed for IP: ::1
+[25-Jul-2025 23:23:38 Europe/Berlin] Geolocation API failed for IP: ::1

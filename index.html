@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e0e7ff 100%);
+            color: #1e1e1e;
+            overflow-x: hidden;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            background: linear-gradient(135deg, #6d00cc, #00bfff);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 1.5s ease-in-out;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        header::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent #f5f7fa transparent;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 2px #6d00cc, 0 1px 2px #00bfff;
+            animation: fadeIn 2s ease-in-out;
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #5c00cc;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s, transform 0.3s, background 0.3s;
+            border-radius: 5px;
+        }
+        nav ul li a:hover {
+            color: #610099;
+            transform: scale(1.1);
+            background: rgba(97, 0, 153, 0.1);
+        }
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .content {
+            flex: 1;
+        }
+        section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideUp 1.5s ease-in-out;
+        }
+        section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        section h2 {
+            color: #8100cc;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        section p, section li {
+            font-size: 1rem;
+            color: #8100cc;
+            line-height: 1.6;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .skill-item {
+            background: linear-gradient(135deg, #6d00cc, #00bfff);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .skill-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        a {
+            color: #007acc;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #005999;
+        }
+        footer {
+            background: linear-gradient(135deg, #00bfff, #6d00cc);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+        /* Cookie Consent Popup Styles */
+        .cookie-consent {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            animation: slideUp 0.5s ease-in-out;
+            display: none; /* Hidden by default, shown via JS */
+        }
+        .cookie-consent p {
+            color: #1e1e1e;
+            margin-bottom: 1rem;
+        }
+        .cookie-consent button {
+            background: linear-gradient(135deg, #6d00cc, #00bfff);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cookie-consent button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul li a {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+            section h2 {
+                font-size: 1.5rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .cookie-consent {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hi! I am Panagiotidis Panagiotis Chrysovalantis</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="ptyxeia.html">Degrees</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact Me</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="content">
+            <section id="about">
+                <h2>About Me</h2>
+                <p>I am a passionate IT professional with a strong foundation in various programming languages and networking. Graduated from 1st EPAL Kalamarias with a degree in IT Application Technician, I have honed my skills over the years through practical experience and continuous learning.</p>
+                <ul>
+                    <li>Languages: Greek, English</li>
+                    <li>Born: 2005</li>
+                    <li>Location: Kalamaria, Thessaloniki, Greece</li>
+                </ul>
+            </section>
+            <br>
+            <section id="skills">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">PHP</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Java</div>
+                    <div class="skill-item">Networking</div>
+                    <div class="skill-item">MySQL</div>
+                    <div class="skill-item">Linux Os</div>
+                </div>
+            </section>
+            <br>
+            <section id="contact">
+                <h2>Contact Me</h2>
+                <p>Email: <a href="mailto:Panagiotidispanagiotis44@gmail.com">Panagiotidispanagiotis44@gmail.com</a></p>
+                <p>Phone: <a href="tel:+306932616368">+30 6932616368</a></p>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>© Panagiotidis Panagiotis Chrysovalantis 2025</p>
+    </footer>
+    <!-- Cookie Consent Popup -->
+    <div class="cookie-consent" id="cookieConsent">
+        <p>This website uses cookies to track your IP address and location for analytics purposes. Do you accept cookies?</p>
+        <button onclick="acceptCookies()">Accept</button>
+        <button onclick="declineCookies()">Decline</button>
+    </div>
+    <script>
+        // Send consent status to server
+        function sendConsentToServer(consent) {
+            fetch('./cookie_handler.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'consent=' + encodeURIComponent(consent)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Server response:', data);
+                if (data.status === 'error' || data.status === 'partial') {
+                    console.error('Server error or partial success:', data.message || 'Data not fully saved');
+                }
+            })
+            .catch(error => console.error('Fetch error:', error));
+        }
+
+        // Handle cookie acceptance
+        function acceptCookies() {
+            sendConsentToServer('accepted');
+            document.getElementById('cookieConsent').style.display = 'none';
+        }
+
+        // Handle cookie decline
+        function declineCookies() {
+            sendConsentToServer('declined');
+            document.getElementById('cookieConsent').style.display = 'none';
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation for sections
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.2 });
+        sections.forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+
+        // Show cookie consent popup on page load
+        window.onload = function() {
+            try {
+                const popup = document.getElementById('cookieConsent');
+                if (popup) {
+                    popup.style.display = 'block';
+                    sendConsentToServer('pending'); // Send pending status on load
+                } else {
+                    console.error('Cookie consent popup element not found!');
+                }
+            } catch (error) {
+                console.error('Error in onload function:', error);
+            }
+        };
+    </script>
+</body>
+</html>

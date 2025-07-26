@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game</title>
+  <meta charset="UTF-8" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: #87CEEB;
+    }
+    canvas {
+      display: block;
+    }
+    .ui-container {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      text-shadow: 2px 2px 2px #000;
+      z-index: 10;
+    }
+    .menu {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      z-index: 20;
+    }
+    .menu button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    #restart-button {
+      background-color: #2ECC71;
+      color: #fff;
+    }
+    #restart-button:hover {
+      background-color: #27AE60;
+    }
+    #leave-button {
+      background-color: #E74C3C;
+      color: #fff;
+    }
+    #leave-button:hover {
+      background-color: #C0392B;
+    }
+    #pause-button {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498DB;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    #pause-button:hover {
+      background-color: #2980B9;
+    }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      background-color: #3498DB;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      font-size: 16px;
+      z-index: 10;
+    }
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      z-index: 30;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen">Loading...</div>
+  <canvas></canvas>
+  <div class="ui-container">
+    <div id="score">Score: 0</div>
+    <div id="lives">Lives: 3</div>
+    <div id="level">Level: 1</div>
+  </div>
+  <div id="menu" class="menu">
+    <h2 id="game-over-message" style="color: #fff; margin-bottom: 20px;">Game Over</h2>
+    <button id="restart-button">Restart</button>
+    <button id="leave-button">Leave</button>
+  </div>
+  <button id="pause-button">Pause</button>
+  <a class="footer" href="index.html">Back to homepage</a>
+
+  <script>
+    const canvas = document.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    const images = {
+      hero: new Image(),
+      obstacle: new Image(),
+      coin: new Image()
+    };
+    images.hero.src = "img/hero.gif";
+    images.obstacle.src = "img/obj.png";
+    images.coin.src = "img/coin.png";
+
+    const sounds = {
+      jump: new Audio('sounds/jump.mp3'),
+      coin: new Audio('sounds/coin.mp3'),
+      hit: new Audio('sounds/hit.mp3'),
+      levelUp: new Audio('sounds/levelup.mp3')
+    };
+
+    const hero = {
+      x: 50,
+      y: 0,
+      width: 80,
+      height: 80,
+      vx: 0,
+      vy: 0,
+      speed: 6,
+      jumping: false,
+      image: images.hero,
+      direction: 'right',
+      invincible: false,
+      invincibleTimer: 0
+    };
+
+    let gravity = 0.8;
+    let friction = 0.9;
+    let level = 1;
+    let score = 0;
+    let lives = 3;
+    let obstacles = [];
+    let coins = [];
+    let keys = {};
+    let canMove = true;
+    let isPaused = false;
+    let cameraX = 0;
+    let groundHeight = 100;
+    const levelWidth = 4000;
+    const INVINCIBILITY_DURATION = 2000; // 2 seconds in milliseconds
+    const SPAWN_SAFE_ZONE = 200; // No obstacles within x: 0 to 200
+
+    function generateObstacles() {
+      obstacles = [];
+      const num = Math.floor(Math.random() * 8) + 5;
+      for (let i = 0; i < num; i++) {
+        const width = Math.random() * 100 + 50;
+        const height = Math.random() * 80 + 50;
+        let x = Math.random() * (levelWidth - width);
+        // Ensure no obstacles in spawn safe zone (x: 0 to 200)
+        if (x < SPAWN_SAFE_ZONE) {
+          x = SPAWN_SAFE_ZONE + Math.random() * (levelWidth - SPAWN_SAFE_ZONE - width);
+        }
+        const y = canvas.height - groundHeight - height;
+        obstacles.push({ x, y, width, height, image: images.obstacle });
+      }
+    }
+
+    function generateCoins() {
+      coins = [];
+      const num = Math.floor(Math.random() * 10) + 5;
+      for (let i = 0; i < num; i++) {
+        let x = Math.random() * (levelWidth - 30);
+        // Avoid coins in spawn safe zone
+        if (x < SPAWN_SAFE_ZONE) {
+          x = SPAWN_SAFE_ZONE + Math.random() * (levelWidth - SPAWN_SAFE_ZONE - 30);
+        }
+        const y = canvas.height - groundHeight - Math.random() * 200 - 50;
+        coins.push({ x, y, width: 30, height: 30, image: images.coin, collected: false });
+      }
+    }
+
+    function collides(a, b) {
+      const buffer = 3;
+      return (
+        a.x + buffer < b.x + b.width &&
+        a.x + a.width - buffer > b.x &&
+        a.y + buffer < b.y + b.height &&
+        a.y + a.height - buffer > b.y
+      );
+    }
+
+    function isOnGroundOrPlatform() {
+      if (hero.y + hero.height >= canvas.height - groundHeight) {
+        return { onGround: true, y: canvas.height - groundHeight - hero.height };
+      }
+      for (let obs of obstacles) {
+        const above = hero.y + hero.height <= obs.y + 5;
+        const withinX = hero.x + hero.width > obs.x && hero.x < obs.x + obs.width;
+        if (above && withinX && hero.y + hero.height + hero.vy >= obs.y) {
+          return { onGround: true, y: obs.y - hero.height };
+        }
+      }
+      return { onGround: false, y: hero.y };
+    }
+
+    function checkCollisions() {
+      if (hero.invincible) return; // Skip collisions during invincibility
+
+      for (let obs of obstacles) {
+        if (collides(hero, obs)) {
+          const dx = (hero.x + hero.width / 2) - (obs.x + obs.width / 2);
+          const dy = (hero.y + hero.height / 2) - (obs.y + obs.height / 2);
+          const width = (hero.width + obs.width) / 2;
+          const height = (hero.height + obs.height) / 2;
+          const crossWidth = width * dy;
+          const crossHeight = height * dx;
+
+          if (Math.abs(dx) <= width && Math.abs(dy) <= height) {
+            if (crossWidth > crossHeight) {
+              if (crossWidth > -crossHeight && hero.vy >= 0) {
+                hero.y = obs.y - hero.height;
+                hero.vy = 0;
+                hero.jumping = false;
+              } else {
+                hero.x = obs.x + obs.width;
+                hero.vx = 0;
+              }
+            } else {
+              if (crossWidth > -crossHeight) {
+                hero.x = obs.x - hero.width;
+                hero.vx = 0;
+              } else if (hero.vy < 0) {
+                hero.y = obs.y + obs.height;
+                hero.vy = 0;
+              }
+            }
+            sounds.hit.play();
+            lives--;
+            updateUI();
+            if (lives <= 0) {
+              canMove = false;
+              document.getElementById("menu").style.display = "block";
+              document.getElementById("game-over-message").textContent = "Game Over";
+            } else {
+              hero.x = 50;
+              hero.y = canvas.height - groundHeight - hero.height;
+              hero.vx = 0;
+              hero.vy = 0;
+              cameraX = 0;
+              hero.invincible = true;
+              hero.invincibleTimer = INVINCIBILITY_DURATION;
+            }
+            return;
+          }
+        }
+      }
+
+      for (let coin of coins) {
+        if (!coin.collected && collides(hero, coin)) {
+          coin.collected = true;
+          score += 100;
+          sounds.coin.play();
+          updateUI();
+        }
+      }
+    }
+
+    function updateHero(deltaTime) {
+      if (!canMove || isPaused) return;
+
+      // Update invincibility timer
+      if (hero.invincible) {
+        hero.invincibleTimer -= deltaTime;
+        if (hero.invincibleTimer <= 0) {
+          hero.invincible = false;
+        }
+      }
+
+      if (keys["KeyA"]) {
+        hero.vx = -hero.speed;
+        hero.direction = 'left';
+      } else if (keys["KeyD"]) {
+        hero.vx = hero.speed;
+        hero.direction = 'right';
+      } else {
+        hero.vx *= friction;
+      }
+
+      if (keys["KeyW"] && isOnGroundOrPlatform().onGround && !hero.jumping) {
+        hero.vy = -18;
+        hero.jumping = true;
+        sounds.jump.play();
+      }
+
+      hero.vy += gravity;
+      hero.x += hero.vx;
+      hero.y += hero.vy;
+
+      const groundInfo = isOnGroundOrPlatform();
+      if (groundInfo.onGround) {
+        hero.y = groundInfo.y;
+        hero.vy = 0;
+        hero.jumping = false;
+      }
+
+      if (hero.x < 0) hero.x = 0;
+
+      checkCollisions();
+
+      if (hero.y > canvas.height) {
+        lives--;
+        updateUI();
+        if (lives <= 0) {
+          canMove = false;
+          document.getElementById("menu").style.display = "block";
+          document.getElementById("game-over-message").textContent = "Game Over";
+        } else {
+          hero.x = 50;
+          hero.y = canvas.height - groundHeight - hero.height;
+          hero.vx = 0;
+          hero.vy = 0;
+          cameraX = 0;
+          hero.invincible = true;
+          hero.invincibleTimer = INVINCIBILITY_DURATION;
+          sounds.hit.play();
+        }
+      }
+
+      if (hero.x >= levelWidth) {
+        level++;
+        hero.speed += 0.5;
+        score += 1000;
+        hero.x = 50;
+        hero.y = canvas.height - groundHeight - hero.height;
+        cameraX = 0;
+        hero.invincible = true;
+        hero.invincibleTimer = INVINCIBILITY_DURATION;
+        sounds.levelUp.play();
+        generateObstacles();
+        generateCoins();
+        updateUI();
+      }
+
+      cameraX = Math.max(0, Math.min(hero.x - canvas.width / 2 + hero.width / 2, levelWidth - canvas.width));
+      console.log(`Hero: x=${hero.x.toFixed(2)}, y=${hero.y.toFixed(2)}, cameraX=${cameraX.toFixed(2)}, invincible=${hero.invincible}`);
+    }
+
+    function updateUI() {
+      document.getElementById("score").textContent = `Score: ${score}`;
+      document.getElementById("lives").textContent = `Lives: ${lives}`;
+      document.getElementById("level").textContent = `Level: ${level}`;
+    }
+
+    function draw() {
+      ctx.fillStyle = "#87CEEB";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#8B4513";
+      ctx.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
+      ctx.fillStyle = "#228B22";
+      ctx.fillRect(0, canvas.height - groundHeight, canvas.width, 10);
+
+      // Draw hero with flashing effect during invincibility
+      if (!hero.invincible || Math.floor(Date.now() / 100) % 2 === 0) {
+        if (images.hero.complete && images.hero.naturalWidth > 0) {
+          ctx.save();
+          if (hero.direction === 'left') {
+            ctx.scale(-1, 1);
+            ctx.drawImage(images.hero, -(hero.x - cameraX + hero.width), hero.y, hero.width, hero.height);
+          } else {
+            ctx.drawImage(images.hero, hero.x - cameraX, hero.y, hero.width, hero.height);
+          }
+          ctx.restore();
+        } else {
+          ctx.fillStyle = "#FF0000";
+          ctx.fillRect(hero.x - cameraX, hero.y, hero.width, hero.height);
+          console.log("Hero image not loaded, using fallback");
+        }
+      }
+
+      for (let obs of obstacles) {
+        if (obs.image && obs.image.complete && obs.image.naturalWidth > 0) {
+          ctx.drawImage(obs.image, obs.x - cameraX, obs.y, obs.width, obs.height);
+        } else {
+          ctx.fillStyle = "#964B00";
+          ctx.fillRect(obs.x - cameraX, obs.y, obs.width, obs.height);
+        }
+      }
+
+      for (let coin of coins) {
+        if (!coin.collected && coin.image && coin.image.complete && coin.image.naturalWidth > 0) {
+          ctx.drawImage(coin.image, coin.x - cameraX, coin.y, coin.width, coin.height);
+        }
+      }
+
+      if (isPaused) {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#fff";
+        ctx.font = "40px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("Paused", canvas.width / 2, canvas.height / 2);
+      }
+    }
+
+    let lastTime = 0;
+    function gameLoop(timestamp) {
+      const deltaTime = timestamp - lastTime;
+      lastTime = timestamp;
+
+      groundHeight = Math.max(100, canvas.height * 0.1);
+      updateHero(deltaTime);
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      keys[e.code] = true;
+      if (e.code === "KeyP") {
+        isPaused = !isPaused;
+        document.getElementById("pause-button").textContent = isPaused ? "Resume" : "Pause";
+      }
+    });
+
+    document.addEventListener("keyup", (e) => {
+      keys[e.code] = false;
+    });
+
+    document.getElementById("restart-button").onclick = () => {
+      hero.x = 50;
+      hero.y = canvas.height - groundHeight - hero.height;
+      hero.vx = 0;
+      hero.vy = 0;
+      hero.speed = 6;
+      hero.jumping = false;
+      hero.invincible = true;
+      hero.invincibleTimer = INVINCIBILITY_DURATION;
+      level = 1;
+      score = 0;
+      lives = 3;
+      canMove = true;
+      isPaused = false;
+      cameraX = 0;
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("pause-button").textContent = "Pause";
+      generateObstacles();
+      generateCoins();
+      updateUI();
+    };
+
+    document.getElementById("leave-button").onclick = () => {
+      window.location.href = "projects.html";
+    };
+
+    document.getElementById("pause-button").onclick = () => {
+      isPaused = !isPaused;
+      document.getElementById("pause-button").textContent = isPaused ? "Resume" : "Pause";
+    };
+
+    let imagesLoaded = 0;
+    const totalImages = 3;
+    function onImageLoadOrError() {
+      imagesLoaded++;
+      if (imagesLoaded === totalImages) {
+        document.getElementById("loading-screen").style.display = "none";
+        hero.y = canvas.height - groundHeight - hero.height;
+        hero.invincible = true;
+        hero.invincibleTimer = INVINCIBILITY_DURATION;
+        generateObstacles();
+        generateCoins();
+        updateUI();
+        requestAnimationFrame(gameLoop);
+      }
+    }
+    Object.values(images).forEach(img => {
+      img.onload = onImageLoadOrError;
+      img.onerror = () => {
+        console.log(`Failed to load image: ${img.src}`);
+        onImageLoadOrError();
+      };
+    });
+
+    Object.values(sounds).forEach(sound => {
+      sound.preload = 'auto';5
+      sound.load();
+    });
+  </script>
+</body>
+</html>

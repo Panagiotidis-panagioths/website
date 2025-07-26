@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+            color: #1e1e1e;
+            overflow-x: hidden;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ffcccc);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 1.5s ease-in-out;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        header::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent #fff5f5 transparent;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 2px #c98888, 0 1px 2px #b22222;
+            animation: fadeIn 2s ease-in-out;
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #b22222;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s, transform 0.3s, background 0.3s;
+            border-radius: 5px;
+        }
+        nav ul li a:hover {
+            color: #8b0000;
+            transform: scale(1.1);
+            background: rgba(139, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideUp 1.5s ease-in-out;
+            margin-bottom: 2rem;
+        }
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .section h2 {
+            color: #d63333;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .project {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+        .project h3 {
+            color: #d63333;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .project p {
+            font-size: 1rem;
+            color: #d63333;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .project a {
+            color: #c0392b;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .project a:hover {
+            color: #a93226;
+        }
+        footer {
+            background: linear-gradient(135deg, #ffcccc, #ff6b6b);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul li a {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+            .section h2 {
+                font-size: 1.5rem;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Projects</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ptyxeia.html">Degrees</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="section" id="python">
+            <h2>Python Projects</h2>
+            <div class="project-grid">
+                <div class="project">
+                    <h3>To-Do List</h3>
+                    <p>A command-line application to manage tasks, allowing users to add, view, and delete tasks using Python.</p>
+                    <a href="todolist.py" download>Download To-Do List Code</a>
+                </div>
+                <div class="project">
+                    <h3>Weight Converter</h3>
+                    <p>A Python script to convert weights between different units (e.g., kilograms to pounds) with a simple interface.</p>
+                    <a href="weight_converter.py" download>Download Weight Converter Code</a>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="javascript">
+           <h2>PHP Creations</h2>
+            <div class="project-grid">
+                <div class="project">
+                    <h3>User Sign up - Sign in</h3>
+                    <p>A well-designed web form created using PHP and Html makes it easy for users to enter and save their information within a powerful database, promoting accessibility while also safeguarding data integrity.</p>
+                    <a href="form.html"> Visit the html sign in menu </a>
+                    <br>
+                    <br>
+                    <a href="form.php" download > Download sign up and sign in codes </a>
+                </div>
+                <div class="project">
+                    <h3>Blog Website</h3>
+                    <p>A internet based app for people to post their blogs </p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <a href="blog.html" > visit the blog website</a>
+                     <br><br>
+                    <a href="blog.zip" download >Download blog website code</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="section" id="java">
+            <h2>Java Projects</h2>
+            <div class="project-grid">
+                <div class="project">
+                    <h3>currency convertor</h3>
+                    <p>A Java-based application for converting different currencies with the use of a simple GUI.</p>
+                    <a href="MoneyTranslatorProject/src/MoneyTranslator.java" download >download Java code</a>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="cpp">
+            <h2>javascript</h2>
+            <div class="project-grid">
+                <div class="project">
+                    <h3>2D game project</h3>
+                    <p>A simple 2D game engine prototype built with javascript and css.</p>
+                    <a href="game.html" target="_blank">Play the game now </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© Panagiotidis Panagiotis Chrysovalantis 2025</p>
+    </footer>
+   
+</body>
+</html>
