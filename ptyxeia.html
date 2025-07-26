@@ -23,11 +23,11 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
             animation: fadeInBody 2s ease-in-out;
-            padding: 0.5rem 0; /* Reduced padding to decrease height */
+            padding: 0.5rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            margin-bottom: 30px; /* Reduced margin to move nav up */
+            margin-bottom: 30px;
         }
         nav ul {
             list-style: none;
@@ -41,7 +41,7 @@
             font-family: 'Raleway', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
-            padding: 0.3rem 0.8rem; /* Adjusted padding for smaller height */
+            padding: 0.3rem 0.8rem;
             transition: color 0.3s, transform 0.3s, background 0.3s;
             border-radius: 5px;
         }
@@ -98,6 +98,8 @@
 
         .degree img {
             width: 100%;
+            height: 400px; /* Fixed height for uniform size */
+            object-fit: cover; /* Ensures the image maintains aspect ratio and fills the space */
             border-radius: 12px;
             border: 2px solid #fff;
             transition: transform 0.3s ease;
@@ -155,7 +157,7 @@
 
         @keyframes imageFade {
             0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes popIn {
@@ -195,7 +197,7 @@
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="Projects.html">Projects</a></li>
             <li><a href="experience.html">Experience</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -205,7 +207,7 @@
             <a href="img/apoly.jpg" target="_blank">
                 <img src="img/apoly.jpg" alt="Degree 1">
             </a>
-            <div class="caption">My first accomplishment was finishing high school.</div>
+            <div class="caption">My first accomplishment was to finishing high school.</div>
         </div>
         <div class="degree">
             <a href="img/ptyxeio.jpg" target="_blank">
@@ -219,8 +221,7 @@
             </a>
             <div class="caption">I also participated in the 16th Student Conference on Computer Science , With tittle " Development of a website focused on solidarity and the circular economy, dorise.gr ".</div>
        
-    </div>
-     -->
+    </div> -->
         
     <footer>
         <p>© Panagiotidis Panagiotis Chrysovalantis</a> 2025</p>
