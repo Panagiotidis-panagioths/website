@@ -1,1 +1,1 @@
-I established this website to express my fascination with programming, possibly inspire others with ideas, and to show what I can do. Everything on this website is alright to copy,  EXCEPT anything related with personal information.
+I established this website to express my fascination with programming, possibly inspire others with ideas, and to show what I can do. Everything on this website can be copied,  EXCEPT anything related with personal information.
