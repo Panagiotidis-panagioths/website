@@ -1,118 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My experience</title>
- <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #fff;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-    color: #000;
-    animation: fadeInBody 1s ease-in;
-  }
+<meta charset="UTF-8">
+<title>My Experience</title>
 
-  h1 {
-    font-size: 2em;
-    font-weight: 800;
-    color: #a3d9c9;
-    margin-bottom: 50px;
-    animation: slideInDown 1s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .degree-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    animation: fadeInBody 2s ease-in;
-  }
-
-  .degree {
-     margin-top: 30px;
-    max-width: 30px;
-    background: #a3d9c9;
-    color: #000000;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    animation: popIn 0.8s ease;
-    width: 50%;
-  border-radius: 12px;
-  border: 2px solid #fff;
-  }
-    .degree2 {
-     margin-top: 30px;
-    max-width: 30px;
-    background: #a3d9c9;
-    color: #000000;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    animation: popIn 0.8s ease;
-    width: 100%;
-  border-radius: 12px;
-  border: 2px solid #fff;
-  }
-
-
-    .degree2-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    animation: fadeInBody 2s ease-in;
-  }
-
-
-  .degree:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  }
-
-   .degree2:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  }
-
-  .degree a {
-    display: block;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-   degree img {
-  width: 100%;
-  height: 200px; /
-  object-fit: cover; 
-  border-radius: 12px;
-  border: 2px solid #fff;
-  transition: transform 0.3s ease;
-  animation: imageFade 1s ease;
-  display: block;
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  color: #000;
+  animation: fadeInBody 1s ease-in;
 }
 
-  .degree2 img {
-  width: 100%;
-  height: 200px; /
-  object-fit: cover; 
-  border-radius: 12px;
-  border: 2px solid #fff;
-  transition: transform 0.3s ease;
-  animation: imageFade 1s ease;
-  display: block;
+h1 {
+  font-size: 2em;
+  font-weight: 800;
+  color: #a3d9c9;
+  margin-bottom: 30px;
+  animation: slideInDown 1s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+.degree-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  animation: fadeInBody 2s ease-in;
+}
 
-   .degree2 img {
-  width: 60%;
-  height: 200px; 
+.degree, .degree2 {
+  margin-top: 30px;
+  max-width: 500px;
+  background: #a3d9c9;
+  color: #000;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: popIn 0.8s ease;
+  width: 90%;
+  border: 2px solid #fff;
+}
+
+.degree:hover, .degree2:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.degree a, .degree2 a {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.degree img, .degree2 img {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
   border-radius: 12px;
   border: 2px solid #fff;
@@ -121,178 +69,143 @@
   display: block;
 }
 
-  .degree:hover img {
-    transform: scale(1.02);
-  }
+.degree:hover img {
+  transform: scale(1.05);
+}
 
-     .degree2:hover img {
-    transform: scale(0.80);
-  }
-   
-  .caption {
-    margin-top: 12px;
-    font-size: 14px;
-    color: #000000;
-    animation: slideInUp 1s ease;
-  }
+.degree2:hover img {
+  transform: scale(0.95);
+}
 
-  footer {
-    margin-top: 60px;
-    padding: 25px;
-    background: #ffffff;
-    color: #a3d9c9;
-    font-size: 14px;
-    animation: fadeInFooter 1.2s ease;
-  }
+.caption {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #000;
+  animation: slideInUp 1s ease;
+}
 
-  footer a {
-    color: #a3d9c9;
-    text-decoration: underline;   
-    transition: opacity 0.3s ease;
-  }
+footer {
+  margin-top: 60px;
+  padding: 25px;
+  background: #ffffff;
+  color: #a3d9c9;
+  font-size: 14px;
+  animation: fadeInFooter 1.2s ease;
+}
 
-  footer a:hover {
-    opacity: 0.7;
-  }
+nav {
+  background-color: white;
+  box-shadow: 0 1px 1px #a3d9c9;
+  animation: fadeInBody 1.5s ease-in-out;
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin-bottom: 20px;
+}
 
-  @keyframes fadeInBody {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
 
-  @keyframes slideInDown {
-    from { transform: translateY(-30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+nav ul li a {
+  text-decoration: none;
+  color: #a3d9c9;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  display: block;
+  transition: color 0.3s, transform 0.3s;
+}
 
-  p {
-    color: #a3d9c9;
-    font-size:  1.2em;
-  }
+nav ul li a:hover {
+  transform: scale(1.05);
+}
 
-  @keyframes slideInUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+@keyframes fadeInBody {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-  @keyframes imageFade {
-    0% { opacity: 0; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
-  }
+@keyframes slideInDown {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
 
-  @keyframes popIn {
-    from { transform: scale(0.95); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+@keyframes slideInUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
 
-  @keyframes fadeInFooter {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+@keyframes imageFade {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
 
-  @media (min-width: 768px) {
-    .degree-container {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  }
-   nav {
-            background-color: white;
-            box-shadow: 0 1px 1px #a3d9c9;
-            animation: fadeInBody 3s ease-in-out;
-            padding: 0.5rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            margin-bottom: 10px;
-        }
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 1em;
-        }
-        nav ul li {
-            margin: 0;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #a3d9c9; /* Matches h1 color from Degrees.html */
-            font-family: 'Raleway', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            padding: 0.3rem 0.8rem;
-            display: block;
-            transition: color 0.3s, transform 0.3s;
-        }
-        nav ul li a:hover {
-            color: #a3d9c9; /* Matches footer color for consistency */
-            transform: scale(1.05);
-        }
+@keyframes popIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
+@keyframes fadeInFooter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 768px) {
+  .degree-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
 </style>
-
 </head>
+
 <body>
 
-  <!-- Main Title -->
-  <h1>My experience</h1>
+<h1>My Experience</h1>
 
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="ptyxeia.html">Degrees</a></li>
+    <li><a href="contact.html">Contact Me</a></li>
+  </ul>
+</nav>
 
-  <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="ptyxeia.html">degrees</a></li>
-            <li><a href="contact.html">Contact me</a></li>
-        </ul>
-    </nav>
+<div class="degree-container">
 
-  <!-- Degrees Section -->
-
-  
-  <div class="degree-container">
-
-
-
-    <!-- Degree 1 -->
-   
-
-    <div class="degree">
-      <a href="https://dorise.gr" target="_blank">
-        <img src="img/dorise.png" alt="Degree ">
-      </a>
-      <div class="caption">I was mainly responsible for the backend development of the website dorise.gr, contributing significantly to its functionality and performance</div>
-    </div>
-
-    <!-- Degree 2 -->
-    
-<div class="degree2">
-      <a href="https://www.terrattack.com/?gad_source=1&gad_campaignid=21124663660&gbraid=0AAAAADolrom7s15nT2sSom_yPxPrwIFpn&gclid=Cj0KCQiAy6vMBhDCARIsAK8rOgnSZakYD2JeVnatbz3wrzDon18x2TZWkWzexKOvKsAvRQAxohfdR7saAvOqEALw_wcB" target="_blank">
-        <img src="img/terra.png" alt="Degree2 ">
-      </a>
-      <div class="caption">I am currently working at a company called terraattack , controling a large stock of more than 2000 products .</div>
+  <div class="degree">
+    <a href="https://dorise.gr" target="_blank">
+      <img src="img/dorise.png" alt="Dorise">
+    </a>
+    <div class="caption">
+      I was mainly responsible for the backend development of the website dorise.gr, contributing significantly to its functionality and performance
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    &copy; Panagiotidis Panagiotis Chrysovalantis 2025 
-  </footer>
+  <div class="degree2">
+    <a href="https://www.terrattack.com/" target="_blank">
+      <img src="img/terra.png" alt="Terraattack">
+    </a>
+    <div class="caption">
+      I am currently working at a company called Terraattack, controlling a large stock of more than 2000 products
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; Panagiotidis Panagiotis Chrysovalantis 2025
+</footer>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
