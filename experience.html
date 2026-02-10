@@ -27,45 +27,45 @@ h1 {
 
 .degree-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
   animation: fadeInBody 2s ease-in;
 }
 
 .degree, .degree2 {
-  margin-top: 30px;
-  max-width: 100px;
+  width: 320px;
   background: #a3d9c9;
   color: #000;
-  padding: 20px;
-  border-radius: 16px;
+  padding: 16px;
+  border-radius: 18px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.3);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   animation: popIn 0.8s ease;
-  width: 100%;
   border: 2px solid #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .degree:hover, .degree2:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.4);
 }
 
 .degree a, .degree2 a {
   display: block;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
 }
 
 .degree img, .degree2 img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
+  height: 190px;
+  object-fit: contain;
+  background: white;
+  border-radius: 14px;
   border: 2px solid #fff;
   transition: transform 0.3s ease;
-  animation: imageFade 1s ease;
   display: block;
 }
 
@@ -74,13 +74,14 @@ h1 {
 }
 
 .degree2:hover img {
-  transform: scale(0.95);
+  transform: scale(1.05);
 }
 
 .caption {
-  margin-top: 12px;
+  margin-top: 14px;
   font-size: 14px;
   color: #000;
+  line-height: 1.5;
   animation: slideInUp 1s ease;
 }
 
@@ -143,11 +144,6 @@ nav ul li a:hover {
   to { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes imageFade {
-  0% { opacity: 0; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
 @keyframes popIn {
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -156,14 +152,6 @@ nav ul li a:hover {
 @keyframes fadeInFooter {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@media (min-width: 768px) {
-  .degree-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
 }
 </style>
 </head>
@@ -209,7 +197,3 @@ nav ul li a:hover {
 
 </body>
 </html>
-
-
-
-
